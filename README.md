@@ -6,7 +6,7 @@ The script will scan APs using airodump-ng, filter WEP/OPN APs, exploit the Null
 The results are displayed on screen and stored in results.txt
 
 # Demo
-![ScreenShot](https://gifyu.com/images/ezgif.com-resize10fe1f.gif)
+![ScreenShot](https://gifyu.com/images/ezgif.com-resize7d67d.gif)
 
 # Requirements
 This script requires the latest fork of [reaver-wps](https://github.com/t6x/reaver-wps-fork-t6x) and the latest version of [Wiire's Pixiewps](https://github.com/wiire/pixiewps) installed

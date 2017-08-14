@@ -1,5 +1,6 @@
 # NullWpsPinAuto
 Simple bash script intended to exploit the Null Wps Pin breach automatically on all APs. Built for Kali Linux.
+The script will filter WEP/OPN APs.
 
 # Requirements
 This script requires the latest fork of reaver-wps and the latest version of [Wiire's Pixiewps](https://github.com/wiire/pixiewps) installed

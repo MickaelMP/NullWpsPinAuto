@@ -27,7 +27,13 @@ read cracktime
 
 clear
 
-xterm -e timeout $scantime airodump-ng $cardmon -w airodump
+#xterm -e timeout $scantime airodump-ng $cardmon -w airodump
+screen -dmS airodump airodump-ng $cardmon -w airodump
+sleep $scantime
+for pid in `pidof airodump-ng`;
+do
+  kill -9 $pid
+done
 
 rm airodump-01.cap
 rm airodump-01.kismet.csv
